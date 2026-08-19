@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FiMenu, FiX, FiSearch, FiHeart, FiShoppingBag } from "react-icons/fi";
+import { FiMenu, FiX, FiShoppingBag } from "react-icons/fi";
 import assets from "../assets/assets";
+import { FaRegUser } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { cart } = useCart();
 
   const navLinks = [
     { path: "/", name: "Home" },
@@ -22,8 +25,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-17.5 bg-light border-b border-gray-200 shadow-sm">
-      <div className="mx-auto h-full px-2 gap-62 md:gap-[570px] lg:px-6 flex items-center lg:justify-between lg:gap-0">
+    <nav className="sticky top-0 z-50 h-17.5 bg-light/75 border-b border-gray-200 shadow-sm">
+      <div className="mx-auto h-full px-2 gap-62 md:gap-142.5 lg:px-6 flex items-center lg:justify-between lg:gap-0">
         <img
           src={assets.Logo}
           alt="Logo"
@@ -57,12 +60,8 @@ const Navbar = () => {
           ))}
 
           <div className="flex lg:hidden items-center gap-8 pt-8 border-t border-gray-200 w-full justify-center ">
-            <button className="text-2xl">
-              <FiSearch />
-            </button>
-
-            <button className="text-2xl">
-              <FiHeart />
+            <button className="text-2xl" onClick={() => navigate("/login")}>
+              <FaRegUser />
             </button>
 
             <button
@@ -70,17 +69,21 @@ const Navbar = () => {
               onClick={() => navigate("/cart")}
             >
               <FiShoppingBag />
+              {cart.length > 0 && (
+                <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-white">
+                  {cart.length}
+                </span>
+              )}
             </button>
           </div>
         </ul>
 
         <div className="hidden lg:flex items-center gap-5  lg:px-4">
-          <button className="text-xl hover:text-primary transition">
-            <FiSearch />
-          </button>
-
-          <button className="text-xl hover:text-primary transition">
-            <FiHeart />
+          <button
+            className="text-xl hover:text-primary transition"
+            onClick={() => navigate("/login")}
+          >
+            <FaRegUser />
           </button>
 
           <button
@@ -88,6 +91,11 @@ const Navbar = () => {
             onClick={() => navigate("/cart")}
           >
             <FiShoppingBag />
+            {cart.length > 0 && (
+              <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-white">
+                {cart.length}
+              </span>
+            )}
           </button>
         </div>
 
