@@ -29,22 +29,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-17.5 bg-light/75 border-b border-gray-200 shadow-sm">
-      <div className="mx-auto h-full px-2 gap-62 md:gap-142.5 lg:px-6 flex items-center lg:justify-between lg:gap-0">
+    <nav className="sticky top-0 z-50 h-[70px] bg-light/95 backdrop-blur border-b border-gray-200 shadow-sm">
+      <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <img
           src={assets.Logo}
           alt="Logo"
-          className="w-20 md:w-20 lg:w-20 object-contain "
+          className="w-16 shrink-0 object-contain sm:w-20"
         />
 
         <ul
           className={`flex lg:flex-row flex-col items-center gap-8 text-[15px]
-          lg:static absolute left-0 top-17.5 w-full lg:w-auto
+          lg:static absolute left-0 top-[70px] w-full lg:w-auto
           bg-white lg:bg-transparent
           h-[calc(100vh-70px)] lg:h-auto
           p-8 lg:p-0
           transition-all duration-300
-          ${open ? "translate-y-0" : "translate-y-[-120%] lg:translate-y-0 "}`}
+          ${open ? "translate-y-0" : "-translate-y-[120%] lg:translate-y-0"}`}
         >
           {navLinks.map((link) => (
             <NavLink
@@ -52,7 +52,7 @@ const Navbar = () => {
               to={link.path}
               onClick={handleLinkClick}
               className={({ isActive }) =>
-                `transition  ${
+                `transition-colors duration-200 py-2 ${
                   isActive
                     ? "border-b-2 border-primary text-primary font-medium"
                     : "text-black hover:text-primary"
@@ -127,7 +127,13 @@ const Navbar = () => {
           </button>
         </div>
 
-        <button className="lg:hidden text-2xl" onClick={() => setOpen(!open)}>
+        <button
+          type="button"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          className="shrink-0 p-2 text-2xl lg:hidden"
+          onClick={() => setOpen(!open)}
+        >
           {open ? <FiX /> : <FiMenu />}
         </button>
       </div>
@@ -136,4 +142,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-  

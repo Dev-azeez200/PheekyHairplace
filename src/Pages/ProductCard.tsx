@@ -1,8 +1,10 @@
-import { FiHeart, FiArrowUpRight } from "react-icons/fi";
+import { FiHeart, FiEye, FiShoppingBag } from "react-icons/fi";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
 import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +12,8 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
   const liked = isInWishlist(product.id);
 
   return (
@@ -31,30 +35,49 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </span>
         )}
 
-        {/* Wishlist */}
-        <button
-          type="button"
-          onClick={() => toggleWishlist(product)}
-          className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur transition ${
-            liked
-              ? "bg-primary text-light"
-              : "bg-white/90 text-dark hover:bg-primary hover:text-light"
-          }`}
-          aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
-        >
-          <FiHeart
-            size={14}
-            className={liked ? "fill-current text-light" : "text-current"}
-          />
-        </button>
+        {/* Product actions */}
+        <div className="absolute right-3 top-3 flex translate-x-3 flex-col gap-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+          <button
+            type="button"
+            onClick={() => toggleWishlist(product)}
+            className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition ${
+              liked
+                ? "bg-primary text-light"
+                : "bg-white/90 text-dark hover:bg-primary hover:text-light"
+            }`}
+            aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            <FiHeart
+              size={14}
+              className={liked ? "fill-current text-light" : "text-current"}
+            />
+          </button>
 
-        {/* View */}
-        <Link
-          to={`/shop/${product.id}`}
-          className="absolute bottom-3 right-3 flex h-9 w-9 translate-y-3 items-center justify-center rounded-full hover:bg-primary hover:text-light hover:font-bold bg-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-        >
-          <FiArrowUpRight size={15} />
-        </Link>
+          <button
+            type="button"
+            onClick={() => {
+              addToCart(product);
+              setAdded(true);
+              window.setTimeout(() => setAdded(false), 1400);
+            }}
+            className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition ${
+              added
+                ? "bg-secondary text-light"
+                : "bg-white/90 text-dark hover:bg-primary hover:text-light"
+            }`}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            <FiShoppingBag size={15} />
+          </button>
+
+          <Link
+            to={`/shop/${product.id}`}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-dark backdrop-blur transition hover:bg-primary hover:text-light"
+            aria-label={`View ${product.name}`}
+          >
+            <FiEye size={15} />
+          </Link>
+        </div>
       </div>
 
       {/* Details */}
