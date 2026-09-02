@@ -26,18 +26,31 @@ const TransformationTile = ({
 }: TransformationTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [showAfter, setShowAfter] = useState(false);
 
   useEffect(() => {
     const tile = tileRef.current;
     if (!tile) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setShowAfter(false);
+        }
+      },
       { threshold: 0.55 },
     );
     observer.observe(tile);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const timeout = window.setTimeout(() => setShowAfter(true), 5000);
+    return () => window.clearTimeout(timeout);
+  }, [isVisible]);
 
   return (
   <div
@@ -49,17 +62,17 @@ const TransformationTile = ({
     <img
       src={before}
       alt="Before transformation"
-      className={`absolute inset-0 h-full w-full object-cover grayscale brightness-75 transition-opacity duration-700 ${isVisible ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}
+      className={`absolute inset-0 h-full w-full object-cover grayscale brightness-75 transition-opacity duration-700 ${showAfter ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}
     />
     <img
       src={after}
       alt="After transformation"
-      className={`h-full w-full object-cover transition-opacity duration-700 ${isVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+      className={`h-full w-full object-cover transition-opacity duration-700 ${showAfter ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
     />
-    <span className={`pointer-events-none absolute bottom-4 left-4 bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 ${isVisible ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}>
+    <span className={`pointer-events-none absolute bottom-4 left-4 bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 ${showAfter ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}>
       Before
     </span>
-    <span className={`pointer-events-none absolute bottom-4 left-4 bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+    <span className={`pointer-events-none absolute bottom-4 left-4 bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 ${showAfter ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
       After
     </span>
   </div>
