@@ -62,7 +62,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             }}
             className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition ${
               added
-                ? "bg-secondary text-light"
+                ? "bg-primary text-light"
                 : "bg-white/90 text-dark hover:bg-primary hover:text-light"
             }`}
             aria-label={`Add ${product.name} to cart`}
