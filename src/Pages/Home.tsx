@@ -40,16 +40,21 @@ const TransformationTile = ({
   }, []);
 
   return (
-  <div ref={tileRef} className={`group relative overflow-hidden rounded-xl ${className}`}>
+  <div
+    ref={tileRef}
+    className={`group relative overflow-hidden rounded-xl transition-all duration-700 ease-out ${
+      isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.98] opacity-0"
+    } ${className}`}
+  >
     <img
       src={before}
       alt="Before transformation"
-      className={`absolute inset-0 h-full w-full object-cover grayscale brightness-75 transition-opacity duration-700 ${isVisible ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}
+      className={`absolute inset-0 h-full w-full object-cover grayscale brightness-75 transition-opacity duration-[1800ms] ${isVisible ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}
     />
     <img
       src={after}
       alt="After transformation"
-      className={`h-full w-full object-cover transition-opacity duration-700 ${isVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+      className={`h-full w-full object-cover transition-opacity duration-[1800ms] ${isVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
     />
     <span className={`pointer-events-none absolute bottom-4 left-4 bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 ${isVisible ? "opacity-0" : "opacity-100 group-hover:opacity-0"}`}>
       Before

@@ -17,9 +17,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const liked = isInWishlist(product.id);
 
   return (
-    <article className="group">
+    <article>
       {/* Image */}
-      <div className="relative h-[320px] overflow-hidden bg-light sm:h-[360px] lg:h-[390px]">
+      <div className="group relative h-80 overflow-hidden bg-light sm:h-90 lg:h-97.5">
         <Link to={`/shop/${product.id}`} className="block h-full">
           <img
             src={product.image}
@@ -36,7 +36,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         )}
 
         {/* Product actions */}
-        <div className="absolute right-3 top-3 flex translate-x-3 flex-col gap-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        <div className="absolute right-3 top-3 flex flex-col gap-2">
           <button
             type="button"
             onClick={() => toggleWishlist(product)}
