@@ -103,7 +103,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
+          <div className="flex flex-col-reverse lg:grid lg:grid-cols-5 gap-4 mt-4">
             <div className="lg:col-span-2 h-[225px] md:h-[260px] overflow-hidden rounded-lg">
               <img
                 src={assets.woman}
@@ -112,7 +112,7 @@ const About = () => {
               />
             </div>
 
-            <div className="lg:col-span-3 bg-dark rounded-lg px-8 md:px-10 py-10 md:py-12 flex flex-col justify-center min-h-[225px] md:min-h-[260px]">
+            <div className="lg:col-span-3  bg-dark rounded-lg px-8 md:px-10 py-10 md:py-12 flex  flex-col justify-center min-h-[225px] md:min-h-[260px]">
               <h2 className="text-2xl md:text-[25px] text-primary mb-3">
                 Our Vision
               </h2>

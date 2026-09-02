@@ -10,9 +10,11 @@ type CartItem = {
   quantity: number;
 };
 
+type CartAddInput = Omit<CartItem, "quantity"> & { quantity?: number };
+
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: CartAddInput) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
 };
@@ -22,15 +24,19 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (item: CartItem) => {
+  const addToCart = (item: CartAddInput) => {
+    const normalizedItem = { ...item, quantity: item.quantity ?? 1 };
+
     setCart((current) => {
-      const existing = current.find((entry) => entry.id === item.id);
+      const existing = current.find((entry) => entry.id === normalizedItem.id);
       if (existing) {
         return current.map((entry) =>
-          entry.id === item.id ? { ...entry, quantity: entry.quantity + item.quantity } : entry,
+          entry.id === normalizedItem.id
+            ? { ...entry, quantity: entry.quantity + normalizedItem.quantity }
+            : entry,
         );
       }
-      return [...current, item];
+      return [...current, normalizedItem];
     });
   };
 

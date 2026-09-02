@@ -202,7 +202,7 @@ const Ourwork = () => {
                 Selected Work
               </p>
 
-              <h2 className="mt-4 text-4xl leading-tight md:text-5xl lg:text-5xl">
+              <h2 className="mt-4 text-xl leading-tight md:text-5xl lg:text-4xl">
                 A closer look at our craft.
               </h2>
             </div>

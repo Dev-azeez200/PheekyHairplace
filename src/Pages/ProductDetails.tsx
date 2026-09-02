@@ -4,6 +4,7 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import { products } from "../data/products";
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { BiPlus } from "react-icons/bi";
 import { FaMinus } from "react-icons/fa6";
 import ProductRating from "./ProductRating";
@@ -13,9 +14,10 @@ const ProductDetails = () => {
 
   const product = products.find((item) => item.id === Number(id));
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const [quantity, setQuantity] = useState(1);
-  const [liked, setLiked] = useState(false);
+  const liked = product ? isInWishlist(product.id) : false;
   const [currentRating, setCurrentRating] = useState(product?.rating ?? 0);
   const [currentReviews, setCurrentReviews] = useState(product?.reviews ?? 0);
   const [hasRated, setHasRated] = useState(false);
@@ -146,10 +148,19 @@ const ProductDetails = () => {
               </div>
 
               <button
-                onClick={() => setLiked(!liked)}
-                className="flex h-12 w-12 items-center justify-center border border-light shadow hover:text-light hover:font-bold hover:bg-primary"
+                type="button"
+                onClick={() => product && toggleWishlist(product)}
+                aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
+                className={`flex h-12 w-12 items-center justify-center border shadow transition ${
+                  liked
+                    ? "border-primary bg-primary text-light"
+                    : "border-light bg-white text-dark hover:bg-primary hover:text-light"
+                }`}
               >
-                <FiHeart size={17} className={liked ? "fill-light" : ""} />
+                <FiHeart
+                  size={17}
+                  className={liked ? "fill-current text-light" : "text-current"}
+                />
               </button>
             </div>
 

@@ -101,19 +101,93 @@ export const products: Product[] = [
     inStock: true,
   },
 
-  
   {
-    id: 6,
-    name: "Ice Rebel",
-    price: 1200,
-    image: nails1,
+    id: 7,
+    name: "Ice Rebel Luxe",
+    price: 1280,
+    image: wig3,
     category: "Pixie",
     length: "10",
-    color: "Blonde",
+    color: "Platinum",
     description:
-      "A modern short cut with a bold icy finish for a confident look.",
+      "A polished icy short cut with a soft finish and confident shape.",
+    rating: 4.7,
+    reviews: 19,
+    inStock: true,
+  },
+
+  {
+    id: 8,
+    name: "Satin Cascade",
+    price: 1600,
+    image: wig1,
+    category: "Bone Straight",
+    length: "26",
+    color: "Black",
+    description:
+      "Long, sleek strands with a glossy finish and natural movement.",
+    rating: 4.8,
+    reviews: 22,
+    inStock: true,
+  },
+
+  {
+    id: 9,
+    name: "Cocoa Blossom",
+    price: 1480,
+    image: wig2,
+    category: "Body Wave",
+    length: "22",
+    color: "Brown",
+    description:
+      "Full-bodied waves in a rich cocoa shade for soft everyday glamour.",
+    rating: 4.8,
+    reviews: 26,
+    inStock: true,
+  },
+
+  {
+    id: 10,
+    name: "Amalfi Layers",
+    price: 1120,
+    image: wig3,
+    category: "Bob",
+    length: "14",
+    color: "Black",
+    description:
+      "A softly layered bob with an effortless shape and refined finish.",
     rating: 4.6,
-    reviews: 15,
+    reviews: 17,
+    inStock: true,
+  },
+
+  {
+    id: 11,
+    name: "Golden Muse",
+    price: 1720,
+    image: woam,
+    category: "Deep Wave",
+    length: "28",
+    color: "Golden",
+    description:
+      "Statement waves with luminous color and luxurious volume.",
+    rating: 4.9,
+    reviews: 34,
+    inStock: true,
+  },
+
+  {
+    id: 12,
+    name: "Noir Majesty",
+    price: 1800,
+    image: woman,
+    category: "Curly",
+    length: "30",
+    color: "Black",
+    description:
+      "Dramatic curls with a soft silhouette and a beautifully full finish.",
+    rating: 5,
+    reviews: 39,
     inStock: true,
   },
 ];

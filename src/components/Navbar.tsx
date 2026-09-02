@@ -3,12 +3,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiShoppingBag } from "react-icons/fi";
 import assets from "../assets/assets";
 import { FaRegUser } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { cart } = useCart();
+  const { wishlist } = useWishlist();
+  const wishlistCount = wishlist.length;
 
   const navLinks = [
     { path: "/", name: "Home" },
@@ -75,6 +79,18 @@ const Navbar = () => {
                 </span>
               )}
             </button>
+
+            <button
+              className="relative text-2xl"
+              onClick={() => navigate("/wishlist")}
+            >
+              <FaRegHeart />
+              {wishlistCount > 0 && (
+                <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-black text-[10px] font-semibold text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </button>
           </div>
         </ul>
 
@@ -97,6 +113,18 @@ const Navbar = () => {
               </span>
             )}
           </button>
+
+          <button
+            className="relative text-xl hover:text-primary transition"
+            onClick={() => navigate("/wishlist")}
+          >
+            <FaRegHeart />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1.5 text-[10px] font-semibold text-white">
+                {wishlistCount}
+              </span>
+            )}
+          </button>
         </div>
 
         <button className="lg:hidden text-2xl" onClick={() => setOpen(!open)}>
@@ -108,3 +136,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+  

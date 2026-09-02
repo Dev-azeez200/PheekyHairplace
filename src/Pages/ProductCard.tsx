@@ -1,25 +1,26 @@
 import { FiHeart, FiArrowUpRight } from "react-icons/fi";
 import { TbCurrencyNaira } from "react-icons/tb";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
+import { useWishlist } from "../context/WishlistContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const [liked, setLiked] = useState(false);
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const liked = isInWishlist(product.id);
 
   return (
     <article className="group">
       {/* Image */}
-      <div className="relative aspect-4/5 overflow-hidden bg-light">
-        <Link to={`/shop/${product.id}`}>
+      <div className="relative h-[320px] overflow-hidden bg-light sm:h-[360px] lg:h-[390px]">
+        <Link to={`/shop/${product.id}`} className="block h-full">
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105 rounded-xl group-hover:scal-105-rounded-xl"
+            className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105 rounded-xl"
           />
         </Link>
 
@@ -33,13 +34,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Wishlist */}
         <button
           type="button"
-          onClick={() => setLiked(!liked)}
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur transition  hover:bg-primary hover:text-light hover:font-bold"
-          aria-label="Add to wishlist"
+          onClick={() => toggleWishlist(product)}
+          className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur transition ${
+            liked
+              ? "bg-primary text-light"
+              : "bg-white/90 text-dark hover:bg-primary hover:text-light"
+          }`}
+          aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
         >
           <FiHeart
             size={14}
-            className={liked ? "fill-dark hover:fill-light text-dark hover:text-light" : ""}
+            className={liked ? "fill-current text-light" : "text-current"}
           />
         </button>
 

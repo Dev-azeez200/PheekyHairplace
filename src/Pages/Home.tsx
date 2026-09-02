@@ -9,7 +9,40 @@ import { FiArrowLeft, FiCheckCircle } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa6";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { useRef } from "react";
+import { IoIosArrowRoundForward } from "react-icons/io";
+
 import { useNavigate } from "react-router-dom";
+
+type TransformationTileProps = {
+  before: string;
+  after: string;
+  className?: string;
+};
+
+const TransformationTile = ({
+  before,
+  after,
+  className = "",
+}: TransformationTileProps) => (
+  <div className={`group relative overflow-hidden rounded-xl ${className}`}>
+    <img
+      src={before}
+      alt="Before transformation"
+      className="absolute inset-0 h-full w-full object-cover grayscale brightness-75 transition-opacity duration-700 group-hover:opacity-0"
+    />
+    <img
+      src={after}
+      alt="After transformation"
+      className="h-full w-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+    />
+    <span className="pointer-events-none absolute bottom-4 left-4 bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white transition-opacity duration-300 group-hover:opacity-0">
+      Before
+    </span>
+    <span className="pointer-events-none absolute bottom-4 left-4 bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-[2px] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      After
+    </span>
+  </div>
+);
 
 const Home = () => {
   const wigs = [
@@ -78,26 +111,31 @@ const Home = () => {
     {
       id: 1,
       image: assets.wig1,
+      after: assets.woman,
       className: "row-span-2",
     },
     {
       id: 2,
       image: assets.wig2,
+      after: assets.woam,
       className: "row-span-1",
     },
     {
       id: 3,
       image: assets.wig3,
+      after: assets.woman,
       className: "row-span-1",
     },
     {
       id: 4,
       image: assets.woam,
+      after: assets.wig1,
       className: "row-span-2",
     },
     {
       id: 5,
       image: assets.woman,
+      after: assets.wig2,
       className: "row-span-1",
     },
   ];
@@ -180,6 +218,16 @@ const Home = () => {
             </p>
           </div>
 
+          <div className="flex justify-end items-end">
+            <button
+              onClick={() => navigate("/wigcollections")}
+              className="group flex items-end justify-end gap-2 border-0 px-4 py-1 text-black transition-all duration-300 hover:rounded-xl hover:border hover:border-[#D4AF37] hover:text-primary"
+            >
+              <span>Explore</span>
+              <IoIosArrowRoundForward className="text-xl transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </div>
+
           <div
             ref={productScrollRef}
             className="mt-14 lg:mt-16 flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none"
@@ -242,11 +290,11 @@ const Home = () => {
 
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center mt-24 md:mt-28">
             <div>
-              <span className="uppercase tracking-[5px] text-xl text-primary">
+              <span className="uppercase flex justify-center items-center tracking-[5px] text-center text-xl lg:text-4xl text-primary">
                 Hair Spa Experience
               </span>
 
-              <h2 className="text-4xl font-serif text-gray-black mt-4 leading-tight">
+              <h2 className="text-xl lg:text-4xl font-serif text-gray-black text-center mt-4 leading-tight">
                 Bespoke Services tailored to your transformation.
               </h2>
 
@@ -258,11 +306,11 @@ const Home = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-gray-black">
+                      <h4 className="font-semibold text-black text-xl lg:text-2xl">
                         {item.title}
                       </h4>
 
-                      <p className="text-gray-500 mt-2 text-sm leading-7">
+                      <p className="text-black mt-2 text-[17px] lg:text-xl leading-7">
                         {item.text}
                       </p>
                     </div>
@@ -275,10 +323,10 @@ const Home = () => {
               <img
                 src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200"
                 alt=""
-                className="rounded-3xl h-90 object-cover w-full"
+                className="rounded-xl h-100 object-cover w-full"
               />
 
-              <div className="absolute -left-6 bottom-10 bg-accent rounded-2xl w-36 h-36 shadow-xl flex flex-col justify-center items-center">
+              <div className="absolute left-25 -bottom-10  border-2 border-white lg:-left-6 lg:bottom-10 bg-accent rounded-2xl w-36 h-36 shadow-xl flex flex-col justify-center items-center">
                 <h3 className="text-5xl font-serif text-[#2b2118]">15</h3>
 
                 <span className="uppercase text-xs tracking-[3px] text-[#2b2118] mt-2">
@@ -304,82 +352,66 @@ const Home = () => {
 
           <div className="hidden lg:grid grid-cols-3 gap-4 auto-rows-65">
             {/* Left */}
-            <div className="row-span-2 overflow-hidden rounded-xl">
-              <img
-                src={gallery[0].image}
-                alt=""
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-              />
-            </div>
+            <TransformationTile
+              before={gallery[0].image}
+              after={gallery[0].after}
+              className="row-span-2"
+            />
 
             {/* Middle */}
-            <div className="overflow-hidden rounded-xl">
-              <img
-                src={gallery[1].image}
-                alt=""
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-              />
-            </div>
+            <TransformationTile
+              before={gallery[1].image}
+              after={gallery[1].after}
+            />
 
             {/* Right Top */}
-            <div className="overflow-hidden rounded-xl h-65 ">
-              <img
-                src={gallery[2].image}
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-                alt=""
-              />
-            </div>
+            <TransformationTile
+              before={gallery[2].image}
+              after={gallery[2].after}
+              className="h-65"
+            />
 
             {/* Middle Bottom */}
-            <div className="relative overflow-hidden rounded-xl ">
-              <img
-                src={gallery[4].image}
-                alt=""
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-              />
-            </div>
+            <TransformationTile
+              before={gallery[4].image}
+              after={gallery[4].after}
+            />
 
             {/* Right Bottom */}
-            <div className="row-span-2 overflow-hidden rounded-xl">
-              <img
-                src={gallery[3].image}
-                alt=""
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-              />
-            </div>
+            <TransformationTile
+              before={gallery[3].image}
+              after={gallery[3].after}
+              className="row-span-2"
+            />
 
-            <div className="col-span-2 overflow-hidden rounded-xl">
-              <img
-                src={gallery[3].image}
-                alt=""
-                className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100 hover:scale-110"
-              />
-            </div>
+            <TransformationTile
+              before={gallery[3].image}
+              after={gallery[3].after}
+              className="col-span-2"
+            />
           </div>
 
           {/* Tablet */}
           <div className="hidden md:grid lg:hidden grid-cols-2 gap-5">
             {gallery.map((item) => (
-              <div key={item.id} className="overflow-hidden rounded-3xl h-87.5">
-                <img
-                  src={item.image}
-                  alt=""
-                  className="w-full h-full object-cover transition duration-700 hover:scale-110"
-                />
-              </div>
+              <TransformationTile
+                key={item.id}
+                before={item.image}
+                after={item.after}
+                className="h-87.5 rounded-3xl"
+              />
             ))}
           </div>
 
           {/* Mobile */}
           <div className="grid md:hidden gap-5">
             {gallery.map((item) => (
-              <div key={item.id} className="overflow-hidden rounded-3xl h-80">
-                <img
-                  src={item.image}
-                  alt=""
-                  className="w-full h-full object-cover transition duration-700 hover:scale-110"
-                />
-              </div>
+              <TransformationTile
+                key={item.id}
+                before={item.image}
+                after={item.after}
+                className="h-80 rounded-3xl"
+              />
             ))}
           </div>
         </div>
