@@ -14,7 +14,7 @@ const ShopToolbar = ({
   openFilters,
 }: ShopToolbarProps) => {
   return (
-    <div className="mb-7 flex items-center justify-between border-b border-light pb-4">
+    <div className="mb-7 flex items-center justify-between border-y border-[#E6D9D0] py-4">
       <span className="text-[10px] uppercase tracking-[0.15em] text-dark">
         {count} pieces
       </span>
@@ -22,7 +22,7 @@ const ShopToolbar = ({
       <div className="flex items-center gap-4">
         <button
           onClick={openFilters}
-          className="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] lg:hidden"
+          className="flex items-center gap-2 rounded-full border border-[#D8C9BD] px-4 py-2 text-[10px] uppercase tracking-[0.15em] text-dark transition hover:border-primary hover:bg-primary hover:text-white"
         >
           <FiSliders size={13} />
           Filters

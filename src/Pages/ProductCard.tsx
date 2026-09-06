@@ -17,20 +17,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const liked = isInWishlist(product.id);
 
   return (
-    <article>
+    <article className="group relative rounded bg-white p-2 transition-all duration-300 hover:-translate-y-1 lg:p-1.5">
       {/* Image */}
-      <div className="group relative h-80 overflow-hidden bg-light sm:h-90 lg:h-97.5">
+      <div className="relative h-90 overflow-hidden bg-[#f0e3d8] sm:h-90 lg:h-100">
         <Link to={`/shop/${product.id}`} className="block h-full">
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105 rounded-xl"
+            className="h-full w-full rounded object-cover transition duration-700 ease-out group-hover:scale-105"
           />
         </Link>
 
         {/* Featured */}
         {product.featured && (
-          <span className="absolute left-3 top-3 bg-dark px-2 py-1 text-[8px] uppercase tracking-[0.2em] text-white">
+          <span className="absolute bottom-2 left-2 rounded bg-white px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#57473e]">
             Featured
           </span>
         )}
@@ -81,22 +81,26 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Details */}
-      <div className="pt-4">
-        <div className="flex items-start justify-between gap-3">
-          <div>
+      <div className="px-2.5 pb-3 pt-3">
+        <div className="flex items-end justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[#a28673]">
+              Virgin hair collection
+            </p>
+
             <Link
               to={`/shop/${product.id}`}
-              className="font-serif text-lg text-dark transition hover:opacity-60"
+              className="mt-1 block font-serif text-lg leading-tight text-[#211912] transition hover:opacity-60"
             >
               {product.name}
             </Link>
 
-            <p className="mt-1 text-[14px] uppercase tracking-[0.12em] text-dark">
+            <p className="mt-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#57473e]">
               {product.length}" · {product.category}
             </p>
           </div>
 
-          <span className="whitespace-nowrap text-xl text-text flex items-center">
+          <span className="flex shrink-0 items-center whitespace-nowrap text-sm font-semibold text-[#211912]">
             <TbCurrencyNaira />{product.price.toLocaleString()}
           </span>
         </div>

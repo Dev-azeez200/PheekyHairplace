@@ -3,7 +3,6 @@ import { FiSearch, FiX } from "react-icons/fi";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
-import ShopFilters from "./ShopFilters";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import ShopToolbar from "./ShopToolbar";
@@ -141,34 +140,8 @@ const Shop = () => {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl gap-10 px-6 pb-20 md:px-10 lg:px-14">
-        {/* Desktop Filters */}
-        <ShopFilters
-          category={category}
-          setCategory={(value) => {
-            setCategory(value);
-            setPage(1);
-          }}
-          length={length}
-          setLength={(value) => {
-            setLength(value);
-            setPage(1);
-          }}
-          color={color}
-          setColor={(value) => {
-            setColor(value);
-            setPage(1);
-          }}
-          price={price}
-          setPrice={(value) => {
-            setPrice(value);
-            setPage(1);
-          }}
-          resetFilters={resetFilters}
-        />
-
-        {/* Products */}
-        <div className="min-w-0 flex-1">
+      <section className="mx-auto max-w-7xl px-6 pb-20 md:px-10 lg:px-14">
+        <div className="min-w-0">
           <ShopToolbar
             count={filteredProducts.length}
             sort={sort}
@@ -180,7 +153,7 @@ const Shop = () => {
           />
 
           {currentProducts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {currentProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -301,11 +274,11 @@ const MobileFilterPanel = ({
   close,
 }: MobileFilterPanelProps) => {
   return (
-    <div className="fixed inset-0 z-50 bg-black/30 lg:hidden">
-      <div className="absolute bottom-0 left-0 max-h-[90vh] w-full overflow-y-auto bg-light p-6">
+    <div className="fixed inset-0 z-50 bg-black/30">
+      <div className="absolute left-1/2 top-5 max-h-[90vh] w-[calc(100%-2rem)] max-w-5xl -translate-x-1/2 overflow-y-auto rounded-2xl bg-light p-6 shadow-2xl md:p-8">
         <div className="mb-8 flex items-center justify-between">
           <h2
-            className="text-3xl"
+            className="font-serif text-3xl italic text-dark"
             style={{
               fontFamily: "Cormorant Garamond, serif",
             }}
@@ -313,7 +286,11 @@ const MobileFilterPanel = ({
             Filters
           </h2>
 
-          <button onClick={close}>
+          <button
+            onClick={close}
+            aria-label="Close filters"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8C9BD] text-dark transition hover:bg-dark hover:text-white"
+          >
             <FiX size={20} />
           </button>
         </div>
@@ -329,17 +306,17 @@ const MobileFilterPanel = ({
           setPrice={setPrice}
         />
 
-        <div className="mt-8 flex gap-3">
+        <div className="mt-8 flex gap-3 border-t border-[#E6D9D0] pt-6">
           <button
             onClick={resetFilters}
-            className="flex-1 border border-dark py-3 text-[10px] uppercase tracking-[0.2em]"
+            className="flex-1 rounded-full border border-[#D8C9BD] py-3 text-[10px] uppercase tracking-[0.2em] text-dark transition hover:border-dark"
           >
             Reset
           </button>
 
           <button
             onClick={close}
-            className="flex-1 bg-dark py-3 text-[10px] uppercase tracking-[0.2em] text-white"
+            className="flex-1 rounded-full bg-dark py-3 text-[10px] uppercase tracking-[0.2em] text-white transition hover:bg-primary"
           >
             Apply
           </button>
@@ -382,19 +359,19 @@ const ShopFiltersMobileContent = ({
 
   return (
     <div>
-      <h3 className="mb-4 text-[9px] uppercase tracking-[0.25em]">
+      <h3 className="mb-4 text-[9px] font-semibold uppercase tracking-[0.25em] text-primary">
         Categories
       </h3>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
         {categories.map((item) => (
           <button
             key={item}
             onClick={() => setCategory(category === item ? "" : item)}
-            className={`border px-3 py-3 text-left text-xs ${
+            className={`rounded-lg border px-3 py-3 text-left text-xs transition ${
               category === item
-                ? "border-[#2D2420] bg-[#2D2420] text-white"
-                : "border-[#E0D9D4]"
+                ? "border-primary bg-primary text-white"
+                : "border-[#E0D9D4] text-dark hover:border-primary"
             }`}
           >
             {item}
@@ -402,7 +379,7 @@ const ShopFiltersMobileContent = ({
         ))}
       </div>
 
-      <h3 className="mb-4 mt-8 text-[9px] uppercase tracking-[0.25em]">
+      <h3 className="mb-4 mt-8 text-[9px] font-semibold uppercase tracking-[0.25em] text-primary">
         Length
       </h3>
 
@@ -411,10 +388,10 @@ const ShopFiltersMobileContent = ({
           <button
             key={item}
             onClick={() => setLength(length === item ? "" : item)}
-            className={`border py-2 text-xs ${
+            className={`rounded-md border py-2 text-xs transition ${
               length === item
-                ? "border-[#2D2420] bg-[#2D2420] text-white"
-                : "border-[#E0D9D4]"
+                ? "border-primary bg-primary text-white"
+                : "border-[#E0D9D4] text-dark hover:border-primary"
             }`}
           >
             {item}"
@@ -422,7 +399,7 @@ const ShopFiltersMobileContent = ({
         ))}
       </div>
 
-      <h3 className="mb-4 mt-8 text-[9px] uppercase tracking-[0.25em]">
+      <h3 className="mb-4 mt-8 text-[9px] font-semibold uppercase tracking-[0.25em] text-primary">
         Price
       </h3>
 
@@ -433,15 +410,18 @@ const ShopFiltersMobileContent = ({
         step="50"
         value={price}
         onChange={(e) => setPrice(Number(e.target.value))}
-        className="w-full accent-[#2D2420]"
+        className="w-full accent-primary"
       />
 
-      <div className="mt-2 text-xs text-[#7C6D65]">
-        Up to <TbCurrencyNaira />
-        {price.toLocaleString()}
+      <div className="mt-2 flex items-center justify-between text-xs text-[#7C6D65]">
+        <span>500</span>
+        <span className="flex items-center font-semibold text-dark">
+          Up to <TbCurrencyNaira />
+          {price.toLocaleString()}
+        </span>
       </div>
 
-      <h3 className="mb-4 mt-8 text-[9px] uppercase tracking-[0.25em]">
+      <h3 className="mb-4 mt-8 text-[9px] font-semibold uppercase tracking-[0.25em] text-primary">
         Color
       </h3>
 
@@ -450,8 +430,8 @@ const ShopFiltersMobileContent = ({
           <button
             key={item.value}
             onClick={() => setColor(color === item.value ? "" : item.value)}
-            className={`h-8 w-8 rounded-full border p-1 ${
-              color === item.value ? "border-[#2D2420]" : "border-transparent"
+            className={`h-9 w-9 rounded-full border p-1 transition ${
+              color === item.value ? "border-primary" : "border-transparent"
             }`}
           >
             <span

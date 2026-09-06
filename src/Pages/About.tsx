@@ -1,5 +1,6 @@
 import { BsStars } from "react-icons/bs";
 import assets from "../assets/assets";
+import { FiAward, FiEdit3, FiShield, FiTarget } from "react-icons/fi";
 
 const About = () => {
   const milestones = [
@@ -41,40 +42,135 @@ const About = () => {
     },
   ];
 
+  const pillars = [
+    {
+      number: "01",
+      title: "EXPERTISE",
+      description:
+        "Professional mastery with painstaking attention to scalp tension care, anatomical sectioning, and zero breakage.",
+      footer: "PRECISION FIRST",
+      icon: FiTarget,
+    },
+    {
+      number: "02",
+      title: "CREATIVITY",
+      description:
+        "Thoughtfully curated silhouettes that express your distinct personality, cultural heritage, and modern allure.",
+      footer: "ARTISANAL DESIGN",
+      icon: FiEdit3,
+    },
+    {
+      number: "03",
+      title: "QUALITY",
+      description:
+        "Enduring results fostered by single-donor human hair extensions, unrefined shea butter, and certified organic plant oils.",
+      footer: "PURE BOTANICALS",
+      icon: FiAward,
+    },
+    {
+      number: "04",
+      title: "CONFIDENCE",
+      description:
+        "An atelier ritual designed from start to finish to leave you empowered, magnetic, and completely commanding of any room.",
+      footer: "SOVEREIGN PRESENCE",
+      icon: FiShield,
+    },
+  ];
+
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${assets.woman})`,
-          }}
+      <section className="relative overflow-hidden bg-accent">
+        <img
+          src={assets.woman}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
         />
-        {/* <div className="absolute inset-0 bg-black/50" /> */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#241E1A]/75 via-[#241E1A]/30 to-[#241E1A]/60 md:hidden" />
+        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-12 px-6 py-16 md:px-10 lg:grid-cols-2 lg:gap-16 lg:px-12">
+          {/* LEFT CONTENT */}
+          <div className="relative z-10 max-w-2xl">
+            {/* Label */}
+            <div className="mb-4 inline-flex :items-center rounded-full border border-primary bg-black px-3 py-1.5 backdrop-blur-sm">
+              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-primary">
+                The Pheeky Philosophy
+              </span>
+            </div>
 
-        <div className="relative z-10 flex min-h-[540px] items-center justify-center px-6 py-20 md:min-h-[600px]">
-          <div className="mx-auto max-w-3xl text-center text-white">
-            <p className="mb-5 text-[15px] uppercase tracking-[0.35em] text-primary">
-              The Pheeky Philosophy
-            </p>
-
-            <h2 className="text-5xl leading-[0.95] md:text-6xl lg:text-7xl">
-              Our Philosophy
+            <h2 className="font-serif text-[48px] italic leading-[0.98] tracking-[-0.03em] text-light sm:text-[58px] md:text-[64px] lg:text-[68px] lg:text-white">
+              We create hair that
+              <br />
+              makes you feel
+              <br />
+              <span className="font-serif italic text-primary">confident.</span>
             </h2>
 
-            <p className="mx-auto mt-7 max-w-2xl text-sm leading-4 text-white md:text-base md:leading-8">
+            {/* Description */}
+            <p className="mt-7 max-w-xl text-[15px] leading-5 text-light md:text-[14px] lg:text-white">
               At Pheeky Hair Place, we believe every hairstyle should reflect
               your personality and confidence. Through exceptional
               craftsmanship, premium products, and personalized care, we create
               beautiful, lasting looks that make every visit a luxurious and
               memorable experience.
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-7">
+              <a className="inline-flex items-center justify-center rounded-xl border-1 border-primary px-7 py-3 text-[10px] uppercase tracking-[0.16em] text-light font-semibold transition-all duration-300 hover:bg-[#E2C45C]">
+                View Our Work
+              </a>
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-8 border-t border-[#DED3CA] pt-7 sm:gap-12">
+              <div>
+                <p className="font-serif text-2xl text-light">6,200+</p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-light">
+                  Crowns Sculpted
+                </p>
+              </div>
+
+              <div>
+                <p className="font-serif text-2xl text-white">100%</p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white">
+                  Scalp-First Care
+                </p>
+              </div>
+
+              <div>
+                <p className="font-serif text-2xl text-white">2 Cities</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-white">
+                  Lagos & London
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <div className="relative mx-auto hidden w-full max-w-[470px] md:block lg:ml-auto">
+            <div className="relative overflow-hidden rounded-t-[50%] rounded-b-[8px]">
+              <img
+                src={assets.woman}
+                alt="Pheeky Hair Place"
+                className="h-[380px] w-full object-cover object-center sm:h-[500px]"
+              />
+
+              {/* Bottom Info Card */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-[#F8F1EB]/95 px-4 py-4 backdrop-blur-sm">
+                <div>
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-[#8B6B43]">
+                    Private Atelier
+                  </p>
+
+                  <p className="mt-1 font-serif text-sm text-[#302822]">
+                    Est. 2018 · Victoria Island · Mayfair
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-light py-14 md:py-20">
+      <section className="bg-secondary py-14 md:py-20">
         <div className=" mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <div className="lg:col-span-3 bg-light shadow rounded-lg p-8 md:p-10 flex flex-col justify-center min-h-[260px]">
@@ -134,7 +230,57 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-light py-24">
+      <section className="bg-light px-6 py-16 md:px-12 lg:px-16">
+        <div className="mx-auto ">
+          <div className="mb-10 flex flex-col items-center justify-center gap-4">
+            <h2 className="font-serif italic text-3xl font-medium tracking-tight text-primary lg:text-5xl">
+              Our Architectural Approach
+            </h2>
+
+            <p className="text-[15px] leading-5 text-dark">
+              Four immutable pillars guide every consultation, cut, braid, and
+              couture styling session inside our suites.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {pillars.map((pillar) => (
+              <div
+                key={pillar.number}
+                className="group flex min-h-[270px] flex-col justify-between bg-white p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
+                <div>
+                  {/* Top */}
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="font-serif text-[20px] text-primary">
+                      {pillar.number}
+                    </span>
+
+                    <pillar.icon
+                      className="text-lg text-primary"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <h3 className="mb-4 font-serif italic text-[18px] font-medium tracking-wide text-dark">
+                    {pillar.title}
+                  </h3>
+
+                  <p className="text-[13px] leading-[1.7] text-dark">
+                    {pillar.description}
+                  </p>
+                </div>
+
+                <div className="mt-8 flex items-center gap-2 text-[13px] font-medium tracking-wide text-[#8b7454]">
+                  <span>{pillar.footer}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary py-24">
         <div className="lg:px-14 px-6">
           <div className="grid lg:grid-cols-2 md:grid-cols-2 gap-16 items-center">
             <div className="relative">

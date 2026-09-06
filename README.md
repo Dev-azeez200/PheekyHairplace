@@ -1,5 +1,9 @@
 # React + TypeScript + Vite
 
+## Test on a phone
+
+Run `npm run dev`, then open the `Network` URL shown by Vite on a phone connected to the same Wi-Fi network. Changes made in the project will update on the phone automatically through Vite's hot reload.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

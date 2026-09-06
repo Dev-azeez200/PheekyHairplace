@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-[70px] bg-light/95 backdrop-blur border-b border-gray-200 shadow-sm">
+    <nav className="sticky top-0 z-50 h-[70px] bg-secondary backdrop-blur border-b border-gray-200 shadow-sm">
       <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <img
           src={assets.Logo}
@@ -54,8 +54,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `transition-colors duration-200 py-2 ${
                   isActive
-                    ? "border-b-2 border-primary text-primary font-medium"
-                    : "text-black hover:text-primary"
+                    ? "border-b-2 border-primary text-primary italic"
+                    : "text-dark hover:text-primary"
                 }`
               }
             >
