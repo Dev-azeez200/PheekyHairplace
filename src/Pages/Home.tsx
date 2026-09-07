@@ -1,7 +1,6 @@
 import assets from "../assets/assets";
 import { PiStarFourBold } from "react-icons/pi";
 import { PiHairDryer } from "react-icons/pi";
-import { FaQuoteLeft } from "react-icons/fa";
 import { FiCheckCircle } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
