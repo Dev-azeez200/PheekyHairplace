@@ -88,11 +88,9 @@ const About = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#241E1A]/75 via-[#241E1A]/30 to-[#241E1A]/60 md:hidden" />
         <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-12 px-6 py-16 md:px-10 lg:grid-cols-2 lg:gap-16 lg:px-12">
-          {/* LEFT CONTENT */}
           <div className="relative z-10 max-w-2xl">
-            {/* Label */}
-            <div className="mb-4 inline-flex :items-center rounded-full border border-primary bg-black px-3 py-1.5 backdrop-blur-sm">
-              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-primary">
+            <div className="mb-4 inline-flex :items-center rounded-full border border-primary  px-3 py-1.5 backdrop-blur-sm">
+              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-light">
                 The Pheeky Philosophy
               </span>
             </div>

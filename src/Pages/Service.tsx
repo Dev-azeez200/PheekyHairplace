@@ -64,25 +64,91 @@ const nailServices = [
 const Services = () => {
   return (
     <>
-      <section className="flex h-[450px] items-center justify-center bg-accent px-6">
-        <div className="flex max-w-3xl flex-col items-center text-center">
-          <span className="uppercase tracking-[0.35em] text-xs text-primary">
-            The Menu
-          </span>
+      <section className="relative overflow-hidden bg-accent">
+        <img
+          src={assets.woman}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#241E1A]/75 via-[#241E1A]/30 to-[#241E1A]/60 md:hidden" />
+        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-12 px-6 py-16 md:px-10 lg:grid-cols-2 lg:gap-16 lg:px-12">
+          <div className="relative z-10 max-w-2xl">
+            <span className="mb-4 inline-flex items-center rounded-full border border-primary px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.25em] text-light backdrop-blur-sm">
+              Our Services
+            </span>
 
-          <h2 className="mt-3 text-5xl md:text-6xl leading-none">
-            Artistry in Every Strand
-          </h2>
+            <h2 className="font-serif text-[48px] italic leading-[0.98] tracking-[-0.03em] text-light sm:text-[58px] md:text-[64px] lg:text-[68px] lg:text-white">
+              YOUR HAIR.
+              <br />
+              <span className="italic font-light">YOUR STYLE.</span>
+              <br />
+              <span className="font-serif italic text-primary">
+                YOUR MOMENT.
+              </span>
+            </h2>
 
-          <p className="mt-5 max-w-2xl text-dark leading-8">
-            Discover premium hair services tailored to your unique beauty. Every
-            appointment is crafted with luxury, precision and attention to
-            detail.
-          </p>
+            <p className="mt-7 max-w-xl text-[15px] leading-5 text-light md:text-[14px] lg:text-white">
+              From everyday elegance to statement looks, our hairstyling
+              services are designed around your individuality, style and
+              occasion. Tailored across intimate private suites in Lagos and
+              London.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-7">
+              <button className="inline-flex items-center justify-center rounded-xl border border-primary px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-light transition-all duration-300 hover:bg-[#E2C45C]">
+                Book an appointment
+              </button>
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-8 border-t border-[#DED3CA] pt-7 sm:gap-12">
+              <div>
+                <h3 className="font-serif text-2xl text-light">4.5k+</h3>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-light">
+                  Crowns perfected
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-serif text-2xl text-white">100%</h3>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white">
+                  Scalp gentle
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-serif text-2xl text-white">2 Suites</h3>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-white">
+                  Lagos & London
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative mx-auto hidden w-full max-w-[470px] md:block lg:ml-auto">
+            <div className="relative overflow-hidden rounded-sm">
+              <img
+                src={assets.woman}
+                alt="Luxury hairstyling"
+                className="h-[420px] w-full object-cover md:h-[500px]"
+              />
+
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-[#F8F1EB]/95 px-4 py-4 backdrop-blur-sm">
+                <div>
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-[#8B6B43]">
+                    Atelier care
+                  </p>
+                  <p className="mt-1 font-serif text-sm text-[#302822]">
+                    Your signature style, perfected
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[#FAF8F5] py-24">
+      <section className="bg-[#FFF8F4] py-24">
         <div className="lg:px-10 px-6">
           <div className="">
             <h3 className="text-3xl italic">Hair Installation</h3>
@@ -92,47 +158,51 @@ const Services = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl overflow-hidden transition-all duration-500 group"
+                className="group relative overflow-hidden rounded bg-white p-2 transition-all duration-300 hover:-translate-y-1 lg:p-1.5"
               >
-                <div className="overflow-hidden">
+                <div className="relative overflow-hidden bg-[#f0e3d8]">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="h-72 w-full object-cover transition duration-700 group-hover:scale-110"
+                    className="h-90 w-full rounded object-cover transition duration-700 ease-out group-hover:scale-105 lg:h-100"
                   />
                 </div>
 
-                <div className="p-6">
-                  <span className="uppercase tracking-[0.25em] text-[11px] text-primary">
+                <div className="px-2.5 pb-3 pt-3">
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[#a28673]">
                     {service.category}
                   </span>
 
-                  <h3 className="mt-2 text-3xl">{service.title}</h3>
+                  <h3 className="mt-1 font-serif text-lg leading-tight text-[#211912]">
+                    {service.title}
+                  </h3>
 
-                  <div className="border-t border-gray-200 mt-8 pt-5 flex justify-between">
+                  <div className="mt-4 flex justify-between gap-3 border-t border-[#211912]/10 pt-3">
                     <div>
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-dark">
+                      <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[#a28673]">
                         Investment
                       </p>
 
-                      <p className="font-semibold mt-1 flex items-center">
+                      <p className="mt-1 flex items-center text-sm font-semibold text-[#211912]">
                         <TbCurrencyNaira />
                         {service.price}
                       </p>
                     </div>
 
                     <div className="text-right">
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-dark">
+                      <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-[#a28673]">
                         Duration
                       </p>
 
-                      <p className="font-semibold mt-1">{service.duration}</p>
+                      <p className="mt-1 text-sm font-semibold text-[#211912]">
+                        {service.duration}
+                      </p>
                     </div>
                   </div>
 
                   <Link
                     to="/login"
-                    className="w-full h-12 text-light uppercase tracking-[0.2em] text-xs hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 px-8 py-3 rounded-md font-medium shadow-lg"
+                    className="mt-5 inline-flex h-11 w-full items-center justify-center gap-3 rounded-md bg-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-light shadow-lg transition-all duration-300 hover:bg-secondary hover:text-accent"
                   >
                     Book Now
                     <FiArrowRight />
@@ -196,7 +266,7 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="bg-light px-6 py-20 md:px-8 lg:px-10">
+      <section className="bg-secondary px-6 py-20 md:px-8 lg:px-10">
         <div>
           <div className="mx-auto mb-14 max-w-2xl text-center">
             <span className="text-xs font-medium uppercase tracking-[0.35em] text-[#C9A227]">
@@ -259,7 +329,7 @@ const Services = () => {
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <div>
               <h3
-                className="text-5xl leading-tight"
+                className="text-2xl lg:text-4xl md:text-3xl leading-tight"
                 // style={{ fontFamily: "Cormorant Garamond, serif" }}
               >
                 The Bridal Experience

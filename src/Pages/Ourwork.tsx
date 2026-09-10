@@ -1,6 +1,6 @@
 import assets from "../assets/assets";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
-import { BsStars } from "react-icons/bs";
+import { PiStarFourBold } from "react-icons/pi";
 
 const Ourwork = () => {
   const services = [
@@ -62,7 +62,7 @@ const Ourwork = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
         <div className="relative px-6 py-24 md:py-32 lg:px-12 lg:py-40">
           <div className="flex justify-center items-center flex-col">
-            <h1 className="mt-6 text-5xl leading-[0.95] md:text-4xl lg:text-5xl">
+            <h1 className="mt-6 text-2xl leading-[0.95] md:text-4xl lg:text-5xl">
               Crafted with intention.
               <span className="text-primary">Styled for you.</span>
             </h1>
@@ -75,7 +75,7 @@ const Ourwork = () => {
 
             <a
               href="#gallery"
-              className="mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 text-white px-8 py-3 rounded-md font-medium shadow-lg"
+              className="mt-10 inline-flex items-center gap-3 bg-primary  transition-all duration-300 text-white px-8 py-3 rounded-md font-medium shadow-lg"
             >
               Explore our work
               <FiArrowUpRight size={16} />
@@ -84,37 +84,77 @@ const Ourwork = () => {
         </div>
       </section>
 
-      <section className=" overflow-hidden bg-accent text-white">
-        <div className=" flex min-h-[250px] items-center justify-center px-6 py-24 lg:px-12">
-          <div className="flex justify-center items-center flex-col gap-8 text-center">
-            <p className="text-xs uppercase tracking-[0.4em] text-primary md:text-sm">
-              The Pheeky Experience
+      <section className="overflow-hidden bg-[#f6eee6] text-dark">
+        <div className="mx-auto grid  items-center gap-10 px-6 py-12 lg:grid-cols-2 lg:gap-14 lg:px-10  lg:py-16">
+          <div className="relative">
+            <div className="overflow-hidden rounded-sm">
+              <img
+                src={assets.woman}
+                alt="The Pheeky Experience"
+                className="h-[420px] w-full object-cover md:h-[520px]"
+              />
+            </div>
+
+            <div className="absolute left-5 top-5 bg-white px-4 py-2 rounded-xl">
+              <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-dark">
+                In Atelier Process
+              </p>
+            </div>
+
+            <div className="absolute -bottom-5 right-5 w-[190px] bg-white px-5 py-4 shadow-lg md:right-[-20px]">
+              <p className="mb-1 text-[9px] font-medium uppercase tracking-[0.2em] text-primary">
+                Craft Metrics
+              </p>
+
+              <p className="text-[11px] leading-4 text-dark/75">
+                4 Hours of Sculpting
+                <br />
+                Zero tension, 12h humidity barrier lock.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center lg:pl-4">
+            <p className="mb-3 text-[12px] uppercase tracking-[0.35em] text-primary">
+              The Transformation
             </p>
 
-            <h2 className="text-5xl leading-[0.95] md:text-6xl lg:text-8xl">
-              Beauty is in
-              <span className="italic">the details.</span>
+            <h2 className="font-serif  italic text-5xl leading-[0.95] text-dark md:text-6xl">
+              From vision
+              <br />
+              <span className="italic text-primary">to finished look.</span>
             </h2>
 
-            <p className=" max-w-2xl text-sm leading-6 text-white/85 md:text-base">
-              We believe great hair is more than just a finished style. It is
-              about precision, individuality, confidence, and the feeling you
-              have when you look in the mirror. Every appointment is approached
-              with care, creativity, and attention to every detail.
-            </p>
+            <div className="mt-8 border-l border-primary pl-5">
+              <p className="max-w-lg font-serif text-sm italic leading-6 text-dark/75 md:text-base">
+                “Every style begins with understanding what the client wants and
+                ends with a look that feels confident, effortless, and uniquely
+                theirs.”
+              </p>
+            </div>
 
-            <div className="flex items-center justify-center gap-4">
-              <span className="h-px w-12 bg-primary/70"></span>
-              <span className="text-primary">
-                <BsStars />
-              </span>
-              <span className="h-px w-12 bg-primary/70"></span>
+            <div className="mt-7 bg-white/60 px-6 py-5">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="text-primary">
+                  <PiStarFourBold />
+                </span>
+
+                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-dark/60">
+                  Case Study: Amara
+                </p>
+              </div>
+
+              <p className="text-xs leading-5 text-dark/65 md:text-sm">
+                Amara’s Wedding Day Transformation — 4 hours of bespoke natural
+                hair sculpting, custom pearl vine integration, delicate veil
+                anchoring, and all-weather humidity seal.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-secondary py-20 md:py-28">
         <div className=" px-6 lg:px-12">
           <div className="flex justify-center items-center flex-col mb-6">
             <p className="text-xs uppercase tracking-[0.35em] text-primary">
@@ -149,7 +189,7 @@ const Ourwork = () => {
         </div>
       </section>
 
-      <section className="bg-[#F3E6DD] py-20 md:py-28">
+      <section className="bg-light py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
@@ -194,7 +234,7 @@ const Ourwork = () => {
         </div>
       </section>
 
-      <section id="gallery" className="bg-light py-20 md:py-28">
+      <section id="gallery" className="bg-secondary py-20 md:py-28">
         <div className=" px-6 lg:px-12">
           <div className="flex flex-col lg:justify-center lg:items-center lg:flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="flex justify-center items-center flex-col">
@@ -244,7 +284,7 @@ const Ourwork = () => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#FAF1EA] py-24 md:py-32">
+      <section className="relative overflow-hidden bg-light py-24 md:py-32">
         <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full border border-[#2D2420]/5" />
         <div className="pointer-events-none absolute -right-10 top-20 h-44 w-44 rounded-full border border-[#2D2420]/5" />
 

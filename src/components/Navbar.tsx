@@ -43,8 +43,14 @@ const Navbar = () => {
           bg-white lg:bg-transparent
           h-[calc(100vh-70px)] lg:h-auto
           p-8 lg:p-0
-          transition-all duration-300
-          ${open ? "translate-y-0" : "-translate-y-[120%] lg:translate-y-0"}`}
+           transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+            will-change-transform
+          origin-top   
+          ${
+            open
+              ? "pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-[120%] opacity-0 lg:pointer-events-auto lg:translate-y-0 lg:opacity-100"
+          }`}
         >
           {navLinks.map((link) => (
             <NavLink
@@ -64,13 +70,22 @@ const Navbar = () => {
           ))}
 
           <div className="flex lg:hidden items-center gap-8 pt-8 border-t border-gray-200 w-full justify-center ">
-            <button className="text-2xl" onClick={() => navigate("/login")}>
+            <button
+              className="text-2xl"
+              onClick={() => {
+                setOpen(false);
+                navigate("/login");
+              }}
+            >
               <FaRegUser />
             </button>
 
             <button
               className="relative text-2xl"
-              onClick={() => navigate("/cart")}
+              onClick={() => {
+                setOpen(false);
+                navigate("/cart");
+              }}
             >
               <FiShoppingBag />
               {cart.length > 0 && (
@@ -82,7 +97,10 @@ const Navbar = () => {
 
             <button
               className="relative text-2xl"
-              onClick={() => navigate("/wishlist")}
+              onClick={() => {
+                setOpen(false);
+                navigate("/wishlist");
+              }}
             >
               <FaRegHeart />
               {wishlistCount > 0 && (
@@ -131,10 +149,25 @@ const Navbar = () => {
           type="button"
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={open}
-          className="shrink-0 p-2 text-2xl lg:hidden"
+          className="relative flex h-10 w-10 shrink-0 items-center justify-center text-2xl lg:hidden"
           onClick={() => setOpen(!open)}
         >
-          {open ? <FiX /> : <FiMenu />}
+          <FiMenu
+            aria-hidden="true"
+            className={`absolute transition-all duration-300 ease-out ${
+              open
+                ? "rotate-90 scale-0 opacity-0"
+                : "rotate-0 scale-100 opacity-100"
+            }`}
+          />
+          <FiX
+            aria-hidden="true"
+            className={`absolute transition-all duration-300 ease-out ${
+              open
+                ? "rotate-0 scale-100 opacity-100"
+                : "-rotate-90 scale-0 opacity-0"
+            }`}
+          />
         </button>
       </div>
     </nav>
