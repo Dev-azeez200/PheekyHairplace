@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import assets from "../assets/assets";
 import { FiCheckCircle } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { TbCurrencyNaira } from "react-icons/tb";
+import BookServiceModal from "./Modals/BookServiceModal";
+import { useNailServices } from "../data/services";
 
-const services = [
+const installationServices = [
   {
     image: assets.wig1,
     category: "Hair Installation",
@@ -16,7 +18,6 @@ const services = [
     image: assets.wig2,
     category: "Salon Experience",
     title: "Traditional Sew-In",
-
     price: "18,000",
     duration: "150 mins",
   },
@@ -29,39 +30,16 @@ const services = [
   },
 ];
 
-const nailServices = [
-  {
-    id: 1,
-    name: "Manicure",
-    image: assets.Manicure,
-    description:
-      "A complete nail care treatment to keep your hands and nails clean, healthy, and beautifully polished.",
-  },
-  {
-    id: 2,
-    name: "Pedicure",
-    image: assets.Pedicure,
-    description:
-      "A complete foot care treatment to keep your feet and toenails clean, healthy, refreshed, and beautifully polished.",
-  },
-  {
-    id: 3,
-    name: "Classic Nail Care",
-    image: assets.nails3,
-    description:
-      "A complete nail care treatment to keep your nails clean, healthy, neatly shaped, and beautifully polished.",
-  },
-
-  {
-    id: 4,
-    name: "Gel Pedicure",
-    image: assets.nails2,
-    description:
-      "A relaxing pedicure finished with durable gel polish for a flawless, long-lasting look.",
-  },
-];
-
 const Services = () => {
+  const nailServices = useNailServices();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<string>();
+
+  const openBooking = (service: string) => {
+    setSelectedService(service);
+    setIsBookingOpen(true);
+  };
+
   return (
     <>
       <section className="relative overflow-hidden bg-accent">
@@ -96,7 +74,11 @@ const Services = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-7">
-              <button className="inline-flex items-center justify-center rounded-xl border border-primary px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-light transition-all duration-300 hover:bg-[#E2C45C]">
+              <button
+                type="button"
+                onClick={() => openBooking("Hair Styling")}
+                className="inline-flex items-center justify-center rounded-xl border border-primary px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-light transition-all duration-300 hover:bg-[#E2C45C]"
+              >
                 Book an appointment
               </button>
             </div>
@@ -155,9 +137,9 @@ const Services = () => {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 mt-10">
-            {services.map((service, index) => (
+            {installationServices.map((service) => (
               <div
-                key={index}
+                key={service.title}
                 className="group relative overflow-hidden rounded bg-white p-2 transition-all duration-300 hover:-translate-y-1 lg:p-1.5"
               >
                 <div className="relative overflow-hidden bg-[#f0e3d8]">
@@ -200,13 +182,14 @@ const Services = () => {
                     </div>
                   </div>
 
-                  <Link
-                    to="/login"
+                  <button
+                    type="button"
+                    onClick={() => openBooking(service.title)}
                     className="mt-5 inline-flex h-11 w-full items-center justify-center gap-3 rounded-md bg-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-light shadow-lg transition-all duration-300 hover:bg-secondary hover:text-accent"
                   >
                     Book Now
                     <FiArrowRight />
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -257,7 +240,13 @@ const Services = () => {
                 </div>
               </div>
 
-              <button className="w-full h-12  text-light uppercase tracking-[0.2em] text-xs  hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 t px-8 py-3 rounded-md font-medium shadow-lg">
+              <button
+                type="button"
+                onClick={() =>
+                  openBooking("Full Wig Construction & Customization")
+                }
+                className="w-full h-12  text-light uppercase tracking-[0.2em] text-xs  hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 t px-8 py-3 rounded-md font-medium shadow-lg"
+              >
                 Request Custom Order
                 <FiArrowRight />
               </button>
@@ -307,12 +296,13 @@ const Services = () => {
                     </p>
                   </div>
 
-                  <Link
-                    to={`/booking?service=${encodeURIComponent(service.name)}`}
+                  <button
+                    type="button"
+                    onClick={() => openBooking(service.name)}
                     className="w-full h-12  text-light uppercase tracking-[0.2em] text-xs  hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 t px-8 py-3 rounded-md font-medium shadow-lg"
                   >
                     Book Service
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -365,7 +355,11 @@ const Services = () => {
                   250,000
                 </h4>
 
-                <button className="w-full h-12  text-light uppercase tracking-[0.2em] text-xs  hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 t px-8 py-3 rounded-md font-medium shadow-lg">
+                <button
+                  type="button"
+                  onClick={() => openBooking("Bridal Styling Package")}
+                  className="w-full h-12  text-light uppercase tracking-[0.2em] text-xs  hover:text-accent justify-center mt-10 inline-flex items-center gap-3 bg-primary hover:bg-secondary transition-all duration-300 t px-8 py-3 rounded-md font-medium shadow-lg"
+                >
                   Enquire Now
                   <FiArrowRight />
                 </button>
@@ -408,6 +402,13 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <BookServiceModal
+        isOpen={isBookingOpen}
+        initialService={selectedService}
+        onClose={() => setIsBookingOpen(false)}
+        onSubmit={() => undefined}
+      />
     </>
   );
 };

@@ -111,9 +111,9 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="group flex h-11 w-full items-center justify-center  mt-10  gap-3 bg-primary hover:bg-secondary   px-8 py-3 rounded-md shadow-lg text-[11px] font-semibold tracking-[0.15em] text-white transition duration-300 "
+                className="group flex h-11 w-full items-center justify-center  mt-10  gap-3 bg-primary px-8 py-3 rounded-md shadow-lg text-[11px] font-semibold tracking-[0.15em] text-white transition duration-300 "
               >
-                SIGN IN
+                Log in
                 <FiArrowRight
                   size={14}
                   className="transition-transform duration-300 group-hover:translate-x-1"

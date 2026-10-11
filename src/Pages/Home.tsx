@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { products } from "../data/products";
 import { useWishlist } from "../context/WishlistContext";
 import { FaStar } from "react-icons/fa";
+import { useTransformations } from "../data/services";
 
 type TransformationTileProps = {
   before: string;
@@ -118,6 +119,7 @@ const Home = () => {
 
   const navigate = useNavigate();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const transformations = useTransformations();
 
   const services = [
     {
@@ -136,7 +138,7 @@ const Home = () => {
     },
   ];
 
-  const gallery = [
+  const fallbackGallery = [
     {
       id: 1,
       image: assets.wig1,
@@ -168,6 +170,17 @@ const Home = () => {
       className: "row-span-1",
     },
   ];
+  const gallery = fallbackGallery.map((fallback, index) => {
+    const transformation = transformations[index];
+    const hasCompletePair =
+      Boolean(transformation?.beforeImage) &&
+      Boolean(transformation?.afterImage);
+    return {
+      ...fallback,
+      image: hasCompletePair ? transformation.beforeImage : fallback.image,
+      after: hasCompletePair ? transformation.afterImage : fallback.after,
+    };
+  });
 
   const testimonials = [
     {
@@ -211,16 +224,16 @@ const Home = () => {
   ];
   return (
     <>
-      <section className="relative min-h-[680px] overflow-hidden bg-dark">
+      <section className="relative min-h-170 overflow-hidden bg-dark">
         <img
           src={assets.woman}
           alt="Pheeky Hair Place Model"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-black/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10" />
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/80 to-transparent" />
-        <div className="relative z-10 mx-auto flex min-h-[680px] max-w-7xl items-center px-6 py-24 lg:px-10">
+        <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10" />
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-linear-to-t from-black/80 to-transparent" />
+        <div className="relative z-10 mx-auto flex min-h-170 max-w-7xl items-center px-6 py-24 lg:px-10">
           <div className="max-w-xl">
             <div className="mb-4 inline-flex :items-center rounded-full border border-primary bg-black/30 px-3 py-1.5 backdrop-blur-sm">
               <span className="text-[12px] italic lg:text-[13px] font-medium uppercase tracking-[0.18em] text-light">
@@ -236,7 +249,7 @@ const Home = () => {
               </span>
             </h1>
 
-            <p className="mt-6 max-w-[500px] italic text-[15px] lg:text-sm leading-6 text-light sm:text-[15px]">
+            <p className="mt-6 max-w-125 italic text-[15px] lg:text-sm leading-6 text-light sm:text-[15px]">
               At PHEEKY HAIR PLACE, we bring together premium human hair wigs
               and exceptional hairstyling to create effortlessly beautiful looks
               designed around you.
@@ -244,7 +257,7 @@ const Home = () => {
 
             {/* CTA Buttons */}
             <div className="mt-8 flex flex-wrap gap-3">
-              <button className="inline-flex items-center justify-center rounded-xl border-1 border-primary px-7 py-3 text-[10px] uppercase tracking-[0.16em] text-light font-semibold transition-all duration-300 hover:bg-[#E2C45C]">
+              <button className="inline-flex items-center justify-center rounded-xl border border-primary px-7 py-3 text-[10px] uppercase tracking-[0.16em] text-light font-semibold transition-all duration-300 hover:bg-[#E2C45C]">
                 Shop Wigs
               </button>
 
@@ -313,8 +326,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-[#FFF8F4] px-6 py-16 md:px-8 md:py-20 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1440px]">
+      <section className="bg-light px-6 py-16 md:px-8 md:py-20 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-360">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="mt-2 font-serif text-3xl leading-none md:text-4xl lg:text-5xl  italic font-light text-primary">
@@ -433,14 +446,14 @@ const Home = () => {
 
           {/* Image */}
           <div className="relative lg:pl-8">
-            <div className="relative overflow-hidden rounded-[2px]">
+            <div className="relative overflow-hidden rounded-xs">
               <img
                 src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200"
                 alt="Pheeky Hair Place salon experience"
-                className="h-[450px] w-full object-cover lg:h-[550px] rounded"
+                className="h-112.5 w-full object-cover lg:h-137.5 rounded"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
             </div>
 
             <div className="absolute -bottom-8 left-6 flex h-32 w-32 flex-col items-center justify-center  bg-dark/80 rounded-bl-xl rounded-tr-xl border-2 border-light shadow-2xl md:left-0 md:h-40 md:w-40">
@@ -544,45 +557,15 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="hidden lg:grid grid-cols-3 gap-4 auto-rows-65">
-            {/* Left */}
-            <TransformationTile
-              before={gallery[0].image}
-              after={gallery[0].after}
-              className="row-span-2"
-            />
-
-            {/* Middle */}
-            <TransformationTile
-              before={gallery[1].image}
-              after={gallery[1].after}
-            />
-
-            {/* Right Top */}
-            <TransformationTile
-              before={gallery[2].image}
-              after={gallery[2].after}
-              className="h-65"
-            />
-
-            {/* Middle Bottom */}
-            <TransformationTile
-              before={gallery[4].image}
-              after={gallery[4].after}
-            />
-
-            {/* Right Bottom */}
-            <TransformationTile
-              before={gallery[3].image}
-              after={gallery[3].after}
-              className="row-span-2"
-            />
-
-            <TransformationTile
-              before={gallery[3].image}
-              after={gallery[3].after}
-              className="col-span-2"
-            />
+          <div className="hidden auto-rows-65 grid-cols-3 gap-4 lg:grid">
+            {gallery.map((item, index) => (
+              <TransformationTile
+                key={item.id}
+                before={item.image}
+                after={item.after}
+                className={index % 4 === 0 ? "row-span-2" : ""}
+              />
+            ))}
           </div>
 
           {/* Tablet */}
@@ -612,7 +595,7 @@ const Home = () => {
       </section>
 
       <section className="bg-[#FAF1EA] px-6 py-16 md:px-10 lg:px-12 lg:py-20">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-350">
           <div className="mb-10 flex items-end justify-between md:mb-14">
             <div>
               <h2 className="font-serif italic text-center text-4xl font-normal uppercase tracking-[-0.03em] text-primary md:text-5xl lg:text-[52px]">
@@ -646,12 +629,12 @@ const Home = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="max-w-[360px] font-serif text-[18px] leading-[1.15] text-dark transition-opacity duration-300 group-hover:opacity-60 md:text-[17px] lg:text-[18px]">
+                <h3 className="max-w-90 font-serif text-[18px] leading-[1.15] text-dark transition-opacity duration-300 group-hover:opacity-60 md:text-[17px] lg:text-[18px]">
                   {post.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 max-w-[390px] text-[12px] leading-[1.65] text-dark md:text-[8px] lg:text-[9px]">
+                <p className="mt-2 max-w-97.5 text-[12px] leading-[1.65] text-dark md:text-[8px] lg:text-[9px]">
                   {post.description}
                 </p>
               </article>
@@ -683,7 +666,7 @@ const Home = () => {
                 ))}
               </div>
 
-              <p className="max-w-[570px] font-serif i text-[14px] italic leading-[1.5] text-dark md:text-[15px]">
+              <p className="max-w-142.5 font-serif i text-[14px] italic leading-normal text-dark md:text-[15px]">
                 {testimonial.text}
               </p>
 
